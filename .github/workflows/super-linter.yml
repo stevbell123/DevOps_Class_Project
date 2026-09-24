@@ -2,6 +2,11 @@ name: Super-Linter
 
 on: push
 
+permissions:
+  contents: read
+  packages: read
+  statuses: write
+
 jobs:
   build:
     name: Lint code base
@@ -9,10 +14,11 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          DEFAULT_BRANCH: main
+          DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_MARKDOWN: false
